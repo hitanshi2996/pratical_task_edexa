@@ -51,6 +51,11 @@ class FragmentProfile : Fragment() {
                     binding.txtIpProfileFullName.setText(it.fullName)
                     binding.txtIpProfileEmail.setText(it.email)
                     binding.txtIpProfilePhoneNumber.setText(it.phone)
+                    if (it.gender == "Male") {
+                        binding.rbProfileMale.isChecked = true
+                    } else {
+                        binding.rbProfileFemale.isChecked = true
+                    }
                 })
         }
 
