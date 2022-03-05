@@ -68,6 +68,7 @@ class EmployeeAdapter(
                         employeeList[position].selected = true
                         binding.llRawEmployee.setBackgroundColor(context.resources.getColor(android.R.color.holo_blue_light))
                     } else {
+                        employeeList[position].selected = false
                         binding.llRawEmployee.setBackgroundColor(context.resources.getColor(android.R.color.white))
                     }
 
