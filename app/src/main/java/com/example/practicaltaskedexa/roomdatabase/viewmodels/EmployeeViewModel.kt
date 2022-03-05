@@ -10,7 +10,7 @@ import com.example.practicaltaskedexa.roomdatabase.entities.UserEntity
 import com.example.practicaltaskedexa.roomdatabase.repositories.EmployeeRepository
 import com.example.practicaltaskedexa.roomdatabase.repositories.UserRepository
 
-class EmployeeViewModel : ViewModel(){
+class EmployeeViewModel : ViewModel() {
     var employeeList: LiveData<List<EmployeeEntity>>? = null
     var searchEmplyeeList: LiveData<List<EmployeeEntity>>? = null
     var employeeByCity: LiveData<List<EmployeeEntity>>? = null
@@ -39,11 +39,22 @@ class EmployeeViewModel : ViewModel(){
         return searchEmplyeeList
     }
 
+    fun setEmployeeByID(
+        context: Context,
+        id: Int,
+        selected: Boolean
+    ) {
+        EmployeeRepository.setEmployeeByID(context, id, selected)
+    }
+
     var employeeLiveData = MutableLiveData<List<EmployeeEntity>>()
     val errorMessage = MutableLiveData<String>()
 
-    fun getEmployeeLiveData(owner: ViewModelStoreOwner, context: Context): MutableLiveData<List<EmployeeEntity>>? {
-        employeeLiveData = EmployeeRepository().getAllEmployeeFromAPI(owner,context)
+    fun getEmployeeLiveData(
+        owner: ViewModelStoreOwner,
+        context: Context
+    ): MutableLiveData<List<EmployeeEntity>>? {
+        employeeLiveData = EmployeeRepository().getAllEmployeeFromAPI(owner, context)
         return employeeLiveData
     }
 }

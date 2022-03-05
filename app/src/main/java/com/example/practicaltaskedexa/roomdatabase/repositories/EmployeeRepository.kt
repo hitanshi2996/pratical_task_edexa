@@ -29,7 +29,8 @@ class EmployeeRepository {
         var employeeByCity: LiveData<List<EmployeeEntity>>? = null
         var employeeListAPI = MutableLiveData<List<EmployeeEntity>>()
 
-        private lateinit var user: LiveData<UserEntity>
+        var setEmployeeByID: LiveData<EmployeeEntity>? = null
+        var getEmployeeByID: LiveData<EmployeeEntity>? = null
 
         private lateinit var employeeViewModel: EmployeeViewModel
 
@@ -71,6 +72,11 @@ class EmployeeRepository {
             return searchEmployeeList
         }
 
+
+        fun setEmployeeByID(context: Context, id: Int, selected: Boolean) {
+            userDatabase = initializeDB(context)
+            userDatabase!!.employeeDao().setEmployeeByID(id, !selected)
+        }
     }
 
     fun getAllEmployeeFromAPI(

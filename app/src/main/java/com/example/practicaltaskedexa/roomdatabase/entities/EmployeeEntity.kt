@@ -18,6 +18,8 @@ data class EmployeeEntity(
     val last_name: String,
 
     @ColumnInfo(name = "first_name")
-    val first_name: String
+    val first_name: String,
 
+    @ColumnInfo(name = "selected")
+    var selected: Boolean = false
 )

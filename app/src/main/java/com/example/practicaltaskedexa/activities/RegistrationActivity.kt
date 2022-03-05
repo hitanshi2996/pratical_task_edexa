@@ -40,6 +40,12 @@ class RegistrationActivity : AppCompatActivity() {
             val rb = findViewById<View>(checkedId) as RadioButton
             gender = rb.text.toString()
         }
+
+        databinding.txtLogin.setOnClickListener(){
+            val intent = Intent(this@RegistrationActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun saveDataToDataBase() {

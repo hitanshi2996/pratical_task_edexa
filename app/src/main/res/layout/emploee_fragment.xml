@@ -10,6 +10,13 @@
         android:layout_height="wrap_content"
         android:drawableRight="@android:drawable/ic_search_category_default" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="Long press for select particular item" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEmployee"
         android:layout_width="match_parent"
