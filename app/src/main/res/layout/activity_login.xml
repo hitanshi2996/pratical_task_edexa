@@ -45,4 +45,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/txtRegi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="For Registration Click Here"/>
 </LinearLayout>

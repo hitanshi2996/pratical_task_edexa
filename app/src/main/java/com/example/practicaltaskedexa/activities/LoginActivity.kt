@@ -46,6 +46,12 @@ class LoginActivity : AppCompatActivity() {
 
         })
 
+        databinding.txtRegi.setOnClickListener() {
+            val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         databinding.btnLogin.setOnClickListener() {
 
             if (checkValidation()) {
