@@ -1,13 +1,16 @@
 package com.example.practicaltaskedexa.adapters
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-class ViewPagerAdapter (supportFragmentManager: FragmentManager) : FragmentStatePagerAdapter(supportFragmentManager) {
+class ViewPagerAdapter(supportFragmentManager: FragmentManager) :
+    FragmentStatePagerAdapter(supportFragmentManager) {
 
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
+    private val mFragmentArgumentList = ArrayList<Bundle>()
 
     override fun getItem(position: Int): Fragment {
         return mFragmentList.get(position)
@@ -21,8 +24,10 @@ class ViewPagerAdapter (supportFragmentManager: FragmentManager) : FragmentState
         return mFragmentTitleList[position]
     }
 
-    fun addFragment(fragment: Fragment, title: String) {
+    fun addFragment(fragment: Fragment, title: String, argument: Bundle) {
+        fragment.arguments = argument
         mFragmentList.add(fragment)
         mFragmentTitleList.add(title)
+        mFragmentArgumentList.add(argument)
     }
 }

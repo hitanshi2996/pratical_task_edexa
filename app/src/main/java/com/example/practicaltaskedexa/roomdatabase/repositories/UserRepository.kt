@@ -14,7 +14,8 @@ class UserRepository {
     companion object {
 
         var userDatabase: UserDatabase? = null
-        var categoryList: LiveData<List<UserEntity>>? = null
+        var userList: LiveData<List<UserEntity>>? = null
+        private lateinit var user: LiveData<UserEntity>
 
         private fun initializeDB(context: Context): UserDatabase {
             return UserDatabase.getDatabaseClient(context)
@@ -32,9 +33,24 @@ class UserRepository {
         fun getAllUsers(context: Context): LiveData<List<UserEntity>>? {
 
             userDatabase = initializeDB(context)
-            categoryList = userDatabase!!.userDao().getUsersFromDB()
-            return categoryList
+            userList = userDatabase!!.userDao().getUsersFromDB()
+            return userList
         }
+
+        fun updateUser(context: Context, user: UserEntity) {
+            userDatabase = initializeDB(context)
+            CoroutineScope(Dispatchers.IO).launch {
+                var id = userDatabase!!.userDao().updateUser(user = user)
+                Log.e("user id", id.toString())
+            }
+        }
+
+        fun getSingleUser(context: Context, userID: Int): LiveData<UserEntity> {
+            userDatabase = initializeDB(context)
+            user = userDatabase!!.userDao().getSingleUserFromDB(userID.toLong())
+            return user
+        }
+
 
     }
 }

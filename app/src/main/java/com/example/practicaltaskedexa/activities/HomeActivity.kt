@@ -23,8 +23,10 @@ class HomeActivity : AppCompatActivity() {
         userID = intent.getIntExtra("userid", -1)
 
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(FragmentProfile(), "Profile")
-        adapter.addFragment(FragmentFeeds(), "Feeds")
+        val args = Bundle()
+        args.putInt("userid", userID)
+        adapter.addFragment(FragmentProfile(), "Profile", args)
+        adapter.addFragment(FragmentFeeds(), "Feeds", args)
         databinding.viewPagerHome.adapter = adapter
         databinding.tabLayoutHome.setupWithViewPager(databinding.viewPagerHome)
     }
