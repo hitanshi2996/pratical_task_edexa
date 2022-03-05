@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.practicaltaskedexa.databinding.ActivityLoginBinding
+import com.example.practicaltaskedexa.roomdatabase.entities.EmployeeEntity
 import com.example.practicaltaskedexa.roomdatabase.entities.UserEntity
+import com.example.practicaltaskedexa.roomdatabase.viewmodels.EmployeeViewModel
 import com.example.practicaltaskedexa.roomdatabase.viewmodels.UserViewModel
 import com.example.practicaltaskedexa.utils.Utils
 
@@ -17,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var databinding: ActivityLoginBinding
     private lateinit var userViewModel: UserViewModel
+    private lateinit var employeeViewModel: EmployeeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,22 @@ class LoginActivity : AppCompatActivity() {
         setContentView(databinding.root)
 
         userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        employeeViewModel = ViewModelProvider(this)[EmployeeViewModel::class.java]
+
+        employeeViewModel.getEmployeeLiveData(this, this)?.observe(this, Observer {
+
+            fun onChanged(@Nullable employeeList: List<EmployeeEntity>) {
+
+                Log.e("employee", employeeList.size.toString())
+                // do something
+                /*   categoryList.addAll(category)
+                   databinding.rvCategoryList.adapter = mAdapter
+                   mAdapter.notifyDataSetChanged()*/
+            }
+
+            onChanged(it)
+
+        })
 
         databinding.btnLogin.setOnClickListener() {
 
@@ -54,6 +74,8 @@ class LoginActivity : AppCompatActivity() {
                                     intent.putExtra("userid", user.id)
                                     startActivity(intent)
                                     finish()
+                                } else {
+                                    Toast.makeText(this, "User not found", Toast.LENGTH_LONG).show()
                                 }
                             }
                         })

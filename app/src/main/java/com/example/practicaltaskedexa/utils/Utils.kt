@@ -1,5 +1,7 @@
 package com.example.practicaltaskedexa.utils
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
 import java.lang.StringBuilder
 import java.security.MessageDigest
@@ -30,6 +32,24 @@ class Utils {
                 e.printStackTrace()
             }
             return ""
+        }
+
+        fun isNetworkAvailable(context: Context): Boolean {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkInfo = connectivityManager.activeNetworkInfo
+            if (networkInfo == null) {
+                /*Toast.makeText(
+                    context,
+                    "Please check your internet connection.",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()*/
+                return false
+            } else if (networkInfo.isConnected) {
+                return true
+            }
+            return false
         }
     }
 }
