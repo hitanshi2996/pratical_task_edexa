@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PracticalTaskEdexa</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="enter_city">Please enter city</string>
+    <string name="enter_valid_phone_number">Please enter valid phone number</string>
+    <string name="phone_number">Please enter phone number</string>
+    <string name="enter_valid_email">Please enter valid email</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_full_name">Please enter full name</string>
+</resources>
