@@ -71,20 +71,37 @@ class FragmentEmployee(city: String) : Fragment() {
         }
 
         binding.edtSearchEmployee.afterTextChanged {
-            let {
-                employeeViewModel.getSearchEmployee(
-                    requireContext(),
-                    city,
-                    binding.edtSearchEmployee.text.toString()
-                )
-                    ?.observe(viewLifecycleOwner, Observer {
-                        Log.e("secarch employee", it.size.toString())
-                        employeeList = mutableListOf<EmployeeEntity>()
-                        employeeList.addAll(it)
-                        mAdapter = EmployeeAdapter(employeeList)
-                        binding.rvEmployee.adapter = mAdapter
-                        mAdapter.notifyDataSetChanged()
-                    })
+            if (city == "") {
+                let {
+                    employeeViewModel.getSearchEmployeeAll(
+                        requireContext(),
+                        binding.edtSearchEmployee.text.toString()
+                    )
+                        ?.observe(viewLifecycleOwner, Observer {
+                            Log.e("secarch employee", it.size.toString())
+                            employeeList = mutableListOf<EmployeeEntity>()
+                            employeeList.addAll(it)
+                            mAdapter = EmployeeAdapter(employeeList)
+                            binding.rvEmployee.adapter = mAdapter
+                            mAdapter.notifyDataSetChanged()
+                        })
+                }
+            } else {
+                let {
+                    employeeViewModel.getSearchEmployee(
+                        requireContext(),
+                        city,
+                        binding.edtSearchEmployee.text.toString()
+                    )
+                        ?.observe(viewLifecycleOwner, Observer {
+                            Log.e("secarch employee", it.size.toString())
+                            employeeList = mutableListOf<EmployeeEntity>()
+                            employeeList.addAll(it)
+                            mAdapter = EmployeeAdapter(employeeList)
+                            binding.rvEmployee.adapter = mAdapter
+                            mAdapter.notifyDataSetChanged()
+                        })
+                }
             }
         }
 

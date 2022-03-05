@@ -25,6 +25,7 @@ class EmployeeRepository {
         var userDatabase: UserDatabase? = null
         var employeeList: LiveData<List<EmployeeEntity>>? = null
         var searchEmployeeList: LiveData<List<EmployeeEntity>>? = null
+        var searchEmployeeListAll: LiveData<List<EmployeeEntity>>? = null
 
         var employeeByCity: LiveData<List<EmployeeEntity>>? = null
         var employeeListAPI = MutableLiveData<List<EmployeeEntity>>()
@@ -76,6 +77,16 @@ class EmployeeRepository {
         fun setEmployeeByID(context: Context, id: Int, selected: Boolean) {
             userDatabase = initializeDB(context)
             userDatabase!!.employeeDao().setEmployeeByID(id, !selected)
+        }
+
+        fun getSearchEmployeeAll(
+            context: Context,
+            search: String
+        ): LiveData<List<EmployeeEntity>>? {
+
+            userDatabase = initializeDB(context)
+            searchEmployeeListAll = userDatabase!!.employeeDao().getSearchEmployeeAll(search)
+            return searchEmployeeListAll
         }
     }
 

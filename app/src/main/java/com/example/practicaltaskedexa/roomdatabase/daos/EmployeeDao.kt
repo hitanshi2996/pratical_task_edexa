@@ -28,4 +28,7 @@ interface EmployeeDao {
 
     @Query("UPDATE employee SET selected = :selected WHERE id = :id")
     fun setEmployeeByID(id: Int, selected: Boolean)
+
+    @Query("SELECT * FROM employee WHERE first_name LIKE '%' || :search || '%' OR last_name LIKE '%' || :search || '%' OR city LIKE '%' || :search || '%'")
+    fun getSearchEmployeeAll(search: String): LiveData<List<EmployeeEntity>>
 }

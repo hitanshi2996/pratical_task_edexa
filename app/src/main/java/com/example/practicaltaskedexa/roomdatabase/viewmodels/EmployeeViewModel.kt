@@ -13,6 +13,7 @@ import com.example.practicaltaskedexa.roomdatabase.repositories.UserRepository
 class EmployeeViewModel : ViewModel() {
     var employeeList: LiveData<List<EmployeeEntity>>? = null
     var searchEmplyeeList: LiveData<List<EmployeeEntity>>? = null
+    var searchEmplyeeListAll: LiveData<List<EmployeeEntity>>? = null
     var employeeByCity: LiveData<List<EmployeeEntity>>? = null
     lateinit var employee: LiveData<EmployeeEntity>
 
@@ -56,5 +57,13 @@ class EmployeeViewModel : ViewModel() {
     ): MutableLiveData<List<EmployeeEntity>>? {
         employeeLiveData = EmployeeRepository().getAllEmployeeFromAPI(owner, context)
         return employeeLiveData
+    }
+
+    fun getSearchEmployeeAll(
+        context: Context,
+        search: String
+    ): LiveData<List<EmployeeEntity>>? {
+        searchEmplyeeListAll = EmployeeRepository.getSearchEmployeeAll(context, search)
+        return searchEmplyeeListAll
     }
 }
